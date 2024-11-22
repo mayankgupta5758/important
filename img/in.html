@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload and Display</title>
+    <style>
+        #uploadedImage {
+            max-width: 100%;
+            max-height: 400px;
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Upload and Display Image</h1>
+    <input type="file" id="imageUpload" accept="image/*">
+    <br>
+    <img id="uploadedImage" alt="Uploaded Image">
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const uploadedImage = document.getElementById('uploadedImage');
+
+        imageUpload.addEventListener('change', function (event) {
+            const file = event.target.files[0]; // Get the uploaded file
+            if (file) {
+                const reader = new FileReader(); // Create FileReader instance
+
+                reader.onload = function (e) {
+                    // Set the src attribute of the image to the file content
+                    uploadedImage.src = e.target.result;
+                    uploadedImage.style.display = 'block'; // Make the image visible
+                };
+
+                reader.readAsDataURL(file); // Read the file content as a Data URL
+            }
+        });
+    </script>
+</body>
+
+</html>
